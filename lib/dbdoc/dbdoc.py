@@ -22,6 +22,8 @@
 import props, os, string
 
 class StandardDoclet:
+    heading_bg_colour = "#CCCCFF" # like javadoc...
+
     def __init__(self, schema, outdir, descr_file, tables=None):
         self.outdir = outdir
         self.descr_file = descr_file
@@ -94,7 +96,7 @@ class StandardDoclet:
                 f.write('<h2>Notes</h2>\n')
                 f.write(notes) # allows html
             f.write('<h2>Columns</h2>\n')
-            f.write('<table border=1>\n<tr><th>Column</th><th>Type</th><th>Nullable</th><th>Default</th><th>Description</th></tr>\n')
+            f.write('<table border=1>\n<tr bgcolor="%s"><th>Column</th><th>Type</th><th>Nullable</th><th>Default</th><th>Description</th></tr>\n' % self.heading_bg_colour)
             for col in table.get_columns():
                 self._index_items.append((col.name, "column in table %s" % table.name,
                                           "table-%s.html#col-%s" % (table.name, col.name)))
@@ -123,7 +125,7 @@ class StandardDoclet:
             f.write('<h2>Referenced by</h2>\n')
             refs = self._fkeys.get(table.name, None)
             if refs:
-                f.write('<table border=1>\n<tr><th>Table</th><th>Column</th><th>Description</th></tr>\n')
+                f.write('<table border=1>\n<tr bgcolor="%s"><th>Table</th><th>Column</th><th>Description</th></tr>\n' % self.heading_bg_colour)
                 for other_table, other_col in refs:
                     ref_table = self.schema.get_table(other_table)
                     ref_col = ref_table.get_column(other_col)
@@ -136,7 +138,7 @@ class StandardDoclet:
             f.write('<h2>Indexes</h2>\n')
             indexes = table.get_indexes()
             if indexes:
-                f.write('<table border=1>\n<tr><th>Index name</th><th>Unique</th><th>Columns</th><th>Description</th></tr>\n')
+                f.write('<table border=1>\n<tr bgcolor="%s"><th>Index name</th><th>Unique</th><th>Columns</th><th>Description</th></tr>\n' % self.heading_bg_colour)
                 for index in indexes:
                     self._index_items.append((index.name, "index on table %s" % table.name,
                                               "table-%s.html#ind-%s" % (table.name, index.name)))
@@ -163,7 +165,7 @@ class StandardDoclet:
             f.write('<h2>Notes</h2>\n')
             f.write(notes)
         f.write('<h2>Tables</h2>\n')
-        f.write('<table border=1><tr><th>Table</th><th>Summary</th></tr>\n')
+        f.write('<table border=1><tr bgcolor="%s"><th>Table</th><th>Summary</th></tr>\n' % self.heading_bg_colour)
         for table in self.tables:
             tabledesc = self.descs.get('table.%s.shortdesc' % table.name, "no summary available")
             f.write('<tr><td><a href="table-%s.html">%s</a></td><td>%s</td></tr>\n' % (table.name, table.name, tabledesc))
