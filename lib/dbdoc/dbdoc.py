@@ -43,7 +43,7 @@ class StandardDoclet:
                     raise ValueError, "no such table in schema: %s" % tablename
         self._get_fkeys()
         self._index_items = []  # list of (name, descr, href) tuples
-        self._schema_name = self.descs.get('schema.name', None) or \
+        self._schema_name = self._get_desc('schema.name', None) or \
                             self.schema.name
         self._generate_pages()
 
@@ -57,6 +57,9 @@ class StandardDoclet:
                     if not refs:
                         self._fkeys[other_table] = refs = []
                     refs.append((table.name, col.name))
+
+    def _get_desc(self, str, default):
+        return self.descs.get(string.lower(str), default)
 
     def _standard_header(self, title, nav):
         return '''<html><head><title>DBDoc: %s (%s)</title></head>
@@ -88,10 +91,10 @@ class StandardDoclet:
             f.write(self._standard_header(table.name, nav))
             f.write('<h1>Table %s</h1>\n' % table.name)
             f.write('<hr noshade size=1>\n')
-            shortdesc = self.descs.get('table.%s.shortdesc' % table.name, None)
+            shortdesc = self._get_desc('table.%s.shortdesc' % table.name, None)
             if shortdesc:
                 f.write('<p>%s</p>\n' % shortdesc)
-            notes = self.descs.get('table.%s.notes' % table.name, None)
+            notes = self._get_desc('table.%s.notes' % table.name, None)
             if notes:
                 f.write('<h2>Notes</h2>\n')
                 f.write(notes) # allows html
@@ -114,7 +117,7 @@ class StandardDoclet:
                 f.write('<td>%s (%s)</td>' % (col.type, col.length))
                 f.write('<td>%s</td>' % (col.nullable and 'yes' or 'no'))
                 f.write('<td>%s</td>' % (col.default_value))
-                col_desc = self.descs.get('table.%s.column.%s.shortdesc' % (table.name, col.name), "&nbsp;")
+                col_desc = self._get_desc('table.%s.column.%s.shortdesc' % (table.name, col.name), "&nbsp;")
                 f.write('<td>%s</td>' % col_desc)
                 f.write('</tr>\n')
 
@@ -129,7 +132,7 @@ class StandardDoclet:
                 for other_table, other_col in refs:
                     ref_table = self.schema.get_table(other_table)
                     ref_col = ref_table.get_column(other_col)
-                    col_desc = self.descs.get('table.%s.column.%s.shortdesc' % (other_table, other_col), "&nbsp;")
+                    col_desc = self._get_desc('table.%s.column.%s.shortdesc' % (other_table, other_col), "&nbsp;")
                     f.write('<tr><td><a href="table-%s.html">%s</a></td><td>%s</td><td>%s</td></tr>\n' % (other_table, other_table, other_col, col_desc))
                 f.write('</table>\n')
             else:
@@ -142,7 +145,7 @@ class StandardDoclet:
                 for index in indexes:
                     self._index_items.append((index.name, "index on table %s" % table.name,
                                               "table-%s.html#ind-%s" % (table.name, index.name)))
-                    descr = self.descs.get('table.%s.index.%s.shortdesc' % (table.name, index.name), '&nbsp;')
+                    descr = self._get_desc('table.%s.index.%s.shortdesc' % (table.name, index.name), '&nbsp;')
                     uniquestr = index.unique and 'yes' or 'no'
                     f.write('<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n' %
                             (index.name, uniquestr, string.join(index.get_column_names(), ', '), descr))
@@ -160,14 +163,14 @@ class StandardDoclet:
         f.write(self._standard_header("Table index", nav))
         f.write('<h1>Table index</h1>\n')
         f.write('<hr noshade size=1>\n')
-        notes = self.descs.get('schema.notes', None)
+        notes = self._get_desc('schema.notes', None)
         if notes:
             f.write('<h2>Notes</h2>\n')
             f.write(notes)
         f.write('<h2>Tables</h2>\n')
         f.write('<table border=1><tr bgcolor="%s"><th>Table</th><th>Summary</th></tr>\n' % self.heading_bg_colour)
         for table in self.tables:
-            tabledesc = self.descs.get('table.%s.shortdesc' % table.name, "no summary available")
+            tabledesc = self._get_desc('table.%s.shortdesc' % table.name, "no summary available")
             f.write('<tr><td><a href="table-%s.html">%s</a></td><td>%s</td></tr>\n' % (table.name, table.name, tabledesc))
         f.write('</table>')
         f.write(self._standard_footer())
