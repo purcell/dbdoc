@@ -94,19 +94,19 @@ def _get_column_info(conn):
     # case this in the documentation class to ignore the length of dates.
     stmt = """SELECT table_name, column_name, data_type, nullable,
                      decode(default_length, NULL, 0, 1) hasdef,
-                     decode(data_type, 'DATE', 11,
+                     decode(data_type, 'DATE', '11',
                                        'NUMBER', nvl(data_precision,38)||'.'||data_scale,
                                        data_length) data_length
               FROM   user_tab_columns"""
     tables = {}
-    for table, attr, typ, notnull, hasdef, length in _query(conn, stmt):
+    for table, attr, typ, nullable, hasdef, length in _query(conn, stmt):
         t = tables.get(table, None)
         if not t:
             t = []
             tables[table] = t
-        # If notnull is not one of 'Y' or 'N' raise AssertionError
-        assert notnull in ('Y', 'N'), notnull
-        nullable = (notnull == 'Y')
+        # If nullable is not one of 'Y' or 'N' raise AssertionError
+        assert nullable in ('Y', 'N'), nullable
+        nullable = (nullable == 'Y')
         t.append((attr, typ, nullable, hasdef, length))
     return tables
 
