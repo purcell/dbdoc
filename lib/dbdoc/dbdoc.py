@@ -41,6 +41,7 @@ class StandardDoclet:
                 table = schema.get_table(tablename)
                 if not table:
                     raise ValueError, "no such table in schema: %s" % tablename
+                self.tables.append(table)
         self._get_fkeys()
         self._index_items = []  # list of (name, descr, href) tuples
         self._schema_name = self._get_desc('schema.name', None) or \
