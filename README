@@ -11,7 +11,7 @@ Contents of this package:
 Example (assuming pygresql installed):
 
   % cd lib
-  % ./pgdbdoc.py ':mydb:myuser' /tmp
+  % ./pgdbdoc.py ':mydb:myuser:' /tmp
 
 This generates HTML documentation in /tmp detailing the schema of the
 postgresql instance 'mydb' running on the local machine.
