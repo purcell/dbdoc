@@ -82,7 +82,7 @@ class StandardDoclet:
         for table in self.tables:
             print "doing table", table.name
             tablefilename = os.path.join(self.outdir, "table-%s.html" % table.name)
-            self._index_items.append((table.name, "table", tablefilename))
+            self._index_items.append((table.name, "table", "table-%s.html" % table.name))
             f = open(tablefilename, 'w')
             nav = '<a href="index.html">Table index</a> | <a href="symbol-index.html">Symbol index</a> | %s' % table.name
             f.write(self._standard_header(table.name, nav))
