@@ -1,3 +1,10 @@
+Changes from 0.2 to 0.3
+=======================
+
+- Added a missing quote character that made page backgrounds
+  appear yellow in some netscapes.
+
+
 Changes from 0.1 to 0.2
 =======================
 
