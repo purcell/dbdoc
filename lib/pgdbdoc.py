@@ -10,7 +10,7 @@
 #
 
 __author__ = 'Steve Purcell <stephen_purcell at yahoo dot com>'
-__version__ = '$Revision: 1.2 $'[11:-2]
+__version__ = '$Revision: 1.3 $'[11:-2]
 
 import dbdoc.dbdoc
 import dbdoc.pgschema
@@ -20,7 +20,7 @@ def usage_exit(progname, msg=None):
     if msg:
         print msg
         print
-    print "usage: %s connstring [-d dblib] outdir [propsfile]" % progname
+    print "usage: %s [-d dbmodule] connstring outdir [propsfile]" % progname
     sys.exit(2)
 
 def main(argv):
