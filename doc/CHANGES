@@ -3,6 +3,8 @@ Changes from 0.5 to 0.6
 
 - Oracle support added courtesy of Andy Todd (andy47 at halfcooked
   dot com)
+- Fixed a small bug whereby absolute paths were sometimes used in hrefs
+  within the symbol index
 
 Changes from 0.4 to 0.5
 =======================
