@@ -4,8 +4,16 @@ DBDoc database schema documentation generator
 Contents of this package:
 
   LICENCE      - The licence under the terms of which this package is provided
-  lib/         - Python library files
+  lib/         - Python library files and scripts
   examples/    - Example schemas and scripts
   doc/         - Documentation, including the TODO list
+
+Example (assuming pygresql installed):
+
+  % cd lib
+  % ./pgdbdoc.py ':mydb:myuser' /tmp
+
+This generates HTML documentation in /tmp detailing the schema of the
+postgresql instance 'mydb' running on the local machine.
 
 Please see http://dbdoc.sourceforge.net/ for more information.
