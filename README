@@ -1,0 +1,11 @@
+DBDoc database schema documentation generator
+============================================
+
+Contents of this package:
+
+  LICENCE      - The licence under the terms of which this package is provided
+  lib/         - Python library files
+  examples/    - Example schemas and scripts
+  doc/         - Documentation, including the TODO list
+
+Please see http://dbdoc.sourceforge.net/ for more information.

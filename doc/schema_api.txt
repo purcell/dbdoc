@@ -1,0 +1,59 @@
+An API for inspecting information about database schemas
+========================================================
+See http://dbdoc.sourceforge.net/ for more information
+--------------------------------------------------------
+
+Version 1
+=========
+
+The top-level of a specific implementation of the API should provide
+a method which returns a Schema object.
+
+Schema objects:
+    Attributes:
+        name -> a name for the schema, usually the same as the database name
+        schema_api_version -> integer schema api version (1)
+    Methods:
+        get_tables() -> return sequence of Table objects for all known tables
+        get_table(name) -> return a Table object for the table with the
+                           given name, or None if the table doesn't exist
+
+Table objects:
+    Attributes:
+        name -> string name of table
+        primary_key_name -> None, or string name of
+                            the primary key column for this table
+    Methods:
+        get_columns() -> return sequence of Column objects for all columns
+        get_column(name) -> return a Column object for the named column, or
+                            None if the column doesn't exist
+        get_column_number(number) -> return a Column object for the numbered
+                            column, or None if the column doesn't exist
+        get_indexes() -> return sequence of all known Index objects
+        get_index(name) -> return a specific Index object
+
+Column objects:
+    Attributes:
+        name -> string name of column
+        number -> numeric index of the column within the table
+        table_name -> string name of containing table (avoids a backref)
+        type -> SQL type string
+        length -> storage length of column, or maximum length if variable length, or None if no limit
+        references -> None, or a tuple of (tablename, columnname)
+        nullable -> 0 or 1, where 1 indicates that null is an allowed value
+        default_value -> None, or the default value of the column
+    Methods:
+        -
+
+Index objects:
+    Attributes:
+        name -> name of index
+        table_name -> name of table
+        unique -> 0 or 1, where 1 indicates that the index is a unique one
+    Methods:
+        get_column_names() -> return sequence of columns comprising the index
+
+
+TODO: triggers?
+TODO: procedures?
+
