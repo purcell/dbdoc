@@ -56,7 +56,7 @@ class _PostgresTable:
 
     def get_columns(self):
         return map(self.get_column, self._colnames)
-    
+
     def get_column(self, name):
         colinfo = self._coldict.get(name, None)
         if not colinfo: return None
@@ -91,7 +91,7 @@ class _PostgresIndex:
 
     def get_column_names(self):
         return self._col_names
-        
+
 
 def _get_column_info(conn):
     Q = """SELECT c.relname, a.attname, t.typname, a.attlen, a.attnotnull,
@@ -110,7 +110,8 @@ def _get_column_info(conn):
         if not t:
             t = []
             tables[table] = t
-        nullable = (notnull != 't')
+        assert notnull in ('t', 'f', 1, 0), notnull
+        nullable = (notnull not in ('t', 1))
         hasdef = (hasdef == 't')
         if length == -1:
             length = typmod
