@@ -3,3 +3,4 @@ TODO:
 - Implement schema for Oracle, Sybase etc.
 - Extend schema API to include stored procedures
 - Extend schema API to include triggers
+- Extend schema API to include views

@@ -1,3 +1,10 @@
+Changes from 0.3 to 0.4
+=======================
+
+- Added page containing index of all symbols
+- Fixed a problem with determining nullability of columns
+
+
 Changes from 0.2 to 0.3
 =======================
 
