@@ -1,11 +1,15 @@
-TODO:
+DEFINITE TO-DOS:
 
-- Implement schema for Oracle, Sybase etc.
-- Support multi-value primary and foreign keys
+- Implement schema for Sybase etc.
+- Support multi-column primary and foreign keys
 - Support names for primary and foreign keys
 - Extend schema API to include table and column constraints
 - Extend schema API to include stored procedures
 - Extend schema API to include triggers
 - Extend schema API to include views
-- Extend schema API to include table inheritance in PostgreSQL (may skip)
-- Add support for PyPGSQL DB module (patch provided by Gerhard Häring)
+
+POSSIBLE TO-DOS:
+
+- Use comment fields in DB (PostgreSQL and Oracle) to store
+  and retrieve descriptions
+- Extend schema API to include table inheritance in PostgreSQL

@@ -8,12 +8,20 @@ Contents of this package:
   examples/    - Example schemas and scripts
   doc/         - Documentation, including the TODO list
 
-Example (assuming pygresql installed):
+PostgreSQL example (assuming pygresql installed):
 
   % cd lib
   % ./pgdbdoc.py ':mydb:myuser:' /tmp
 
-This generates HTML documentation in /tmp detailing the schema of the
-postgresql instance 'mydb' running on the local machine.
+  This generates HTML documentation in /tmp detailing the schema of the
+  postgresql instance 'mydb' running on the local machine.
+
+Oracle example (assuming DCOracle2 installed):
+
+  % cd lib
+  % ./oradbdoc.py -d DCOracle2 'user/password@db' /tmp
+
+  This generates HTML documentation in /tmp detailing the schema of the
+  Oracle instance 'db' running on the local machine.
 
 Please see http://dbdoc.sourceforge.net/ for more information.
