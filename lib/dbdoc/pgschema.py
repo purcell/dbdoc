@@ -138,7 +138,14 @@ def _get_foreign_keys(conn):
         AND (pg_proc_1.proname LIKE '%del')
         AND (pg_trigger.tgrelid=pt.tgconstrrelid)
         AND (pg_trigger_1.tgrelid = pt.tgconstrrelid))'''):
-        tgargs = string.split(tgargs, '\\000')
+        # Varies between psycopg and other DB APIs.
+        if string.find(tgargs, '\000') != -1:
+            tgargs = string.split(tgargs, '\000')
+        else:
+            tgargs = string.split(tgargs, '\\000')
+        if len(tgargs) != 7:
+            raise RuntimeError, "error parsing trigger args for foreign key: %s" \
+                  % repr(tgargs)
         (name, owner_table, referenced_table,
          unknown, column, referenced_table_pkey, blank) = tgargs
         t = fkeys.get(owner_table, None)
@@ -172,7 +179,6 @@ def _get_indexes(conn):
     for table, index_name, cols, unique in results:
         # this looped query is another opportunity for optimisation
         def first(row): return row[0]
-        cols = string.replace(cols, ' ', ',')
         cols = string.replace(cols, ' ', ',')
         colnames = map(first, _query(conn,
             """select a.attname from pg_attribute a, pg_class where
