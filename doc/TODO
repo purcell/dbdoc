@@ -1,6 +1,11 @@
 TODO:
 
 - Implement schema for Oracle, Sybase etc.
+- Support multi-value primary and foreign keys
+- Support names for primary and foreign keys
+- Extend schema API to include table and column constraints
 - Extend schema API to include stored procedures
 - Extend schema API to include triggers
 - Extend schema API to include views
+- Extend schema API to include table inheritance in PostgreSQL (may skip)
+- Add support for PyPGSQL DB module (patch provided by Gerhard Häring)
