@@ -19,28 +19,31 @@ def usage_exit(progname, msg=None):
     if msg:
         print msg
         print
-    print "usage: %s [-d dbmodule] connstring outdir [propsfile]" % progname
+    print "usage: %s [-d dbmodule] [-p propsfile] connstring outdir [table_name ...]" % progname
     sys.exit(2)
 
 def main(argv):
     progname = os.path.basename(argv[0])
     dblib = "cx_Oracle"
+    props_file = None
+    table_names = None
     try:
-        opts, args = getopt.getopt(sys.argv[1:], 'hd:', ['help', 'dblib='])
+        opts, args = getopt.getopt(sys.argv[1:], 'hd:p:', ['help', 'dblib=', 'props='])
         for opt, value in opts:
             if opt in ('-h','--help'):
                 usage_exit(progname)
             if opt in ('-d','--dblib'):
                 dblib = value
+            if opt in ('-p','--props'):
+                props_file = value
     except getopt.error, e:
         usage_exit(progname, e)
-    if len(args) == 3:
-        conn_string, outdir, props_file = args
-    elif len(args) == 2:
-        conn_string, outdir = args
-        props_file = None
-    else:
+    if len(args) < 2:
         usage_exit(progname)
+
+    conn_string, outdir = args[:2]
+    if len(args) > 2:
+        table_names = args[2:]
 
     try:
         connector = __import__(dblib)
@@ -50,7 +53,8 @@ def main(argv):
 
     conn = connector.connect(conn_string)
     schema = dbdoc.oraschema.OracleSchema(conn, 'Oracle')
-    dbdoc.dbdoc.main(schema, outdir, props_file)
+    dbdoc.dbdoc.main(schema, outdir, props_file, table_names)
+
 
 if __name__ == '__main__':
     main(sys.argv)
