@@ -8,6 +8,14 @@ Contents of this package:
   examples/    - Example schemas and scripts
   doc/         - Documentation, including the TODO list
 
+Oracle example (assuming cx_Oracle installed):
+
+  % cd lib
+  % ./oradbdoc.py 'user/password@db' /tmp
+
+  This generates HTML documentation in /tmp detailing the schema of the
+  Oracle instance 'db' running on the local machine.
+
 PostgreSQL example (assuming pygresql installed):
 
   % cd lib
@@ -16,12 +24,11 @@ PostgreSQL example (assuming pygresql installed):
   This generates HTML documentation in /tmp detailing the schema of the
   postgresql instance 'mydb' running on the local machine.
 
-Oracle example (assuming DCOracle2 installed):
-
-  % cd lib
-  % ./oradbdoc.py -d DCOracle2 'user/password@db' /tmp
-
-  This generates HTML documentation in /tmp detailing the schema of the
-  Oracle instance 'db' running on the local machine.
-
 Please see http://dbdoc.sourceforge.net/ for more information.
+
+
+Known problems
+==============
+
+Using the DCOracle2 module can result in garbage default column values.
+cx_Oracle is recommended in its place.
