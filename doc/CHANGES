@@ -1,3 +1,12 @@
+Changes from 0.4 to 0.5
+=======================
+
+- Fixed a problem related to psycopg when parsing foreign key trigger
+  arguments; psycopg does not escape nulls in strings, but the other
+  Postgres DB API modules escape the values to '\\000'
+- Light blue backgrounds for table headings, akin to javadoc
+- TODO file extended!
+
 Changes from 0.3 to 0.4
 =======================
 
