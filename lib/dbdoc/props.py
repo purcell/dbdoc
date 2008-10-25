@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#
+# -*- encoding: iso-8859-15 -*-
 # Use of this software is subject to the terms specified in the LICENCE
 # file included in the distribution package, and also available via
 # http://dbdoc.sourceforge.net/
@@ -10,7 +10,7 @@
 #
 
 __author__ = 'Steve Purcell <stephen_purcell at yahoo dot com>'
-__version__ = "$Revision: 1.1.1.1 $"[11:-2] 
+__version__ = "$Revision: 1.2 $"[11:-2] 
 
 import UserDict, re, string, os
 
