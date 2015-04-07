@@ -1,6 +1,6 @@
 An API for inspecting information about database schemas
 ========================================================
-See http://dbdoc.sourceforge.net/ for more information
+See https://github.com/purcell/dbdoc for more information
 --------------------------------------------------------
 
 Version 1

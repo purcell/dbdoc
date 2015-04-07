@@ -2,7 +2,7 @@
 #
 # Use of this software is subject to the terms specified in the LICENCE
 # file included in the distribution package, and also available via
-# http://dbdoc.sourceforge.net/
+# https://github.com/purcell/dbdoc
 #
 
 # Oracle 8i implementation of the database schema API
