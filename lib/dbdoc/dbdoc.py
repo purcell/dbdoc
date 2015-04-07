@@ -34,7 +34,7 @@ class StandardDoclet:
             f.close()
         self.schema = schema
         if not tables:
-            self.tables = schema.get_tables()
+            self.tables = sorted(schema.get_tables(), None, lambda t: t.name)
         else:
             self.tables = []
             for tablename in tables:
