@@ -43,6 +43,10 @@ Using the DCOracle2 module can result in garbage default column values.
 cx_Oracle is recommended in its place.
 
 
+## Similar tools
+
+[SchemaSpy](http://schemaspy.sourceforge.net/) is pretty nice.
+
 ## About
 
 This code was written by Steve Purcell a very long time ago (~2001),
