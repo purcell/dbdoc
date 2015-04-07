@@ -53,7 +53,7 @@ def main(argv):
         sys.exit(1)
 
     conn = connector.connect(conn_string)
-    schema = dbdoc.oraschema.OracleSchema(conn, 'postgres')
+    schema = dbdoc.pgschema.PostgresSchema(conn, 'postgres')
     dbdoc.dbdoc.main(schema, outdir, props_file, table_names)
 
 
